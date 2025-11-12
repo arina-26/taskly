@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// 📝 Signup
+//Signup
 router.post("/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// 🔑 Login
+//Login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// 🛡️ Middleware to verify token
+//Middleware to verify token
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ message: "No token provided" });
@@ -58,7 +58,7 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// 👥 Get all users (Protected)
+//Get all users (Protected)
 router.get("/users", verifyToken, async (req, res) => {
   try {
     const users = await User.find({}, "-password"); // hide passwords
